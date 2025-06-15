@@ -16,6 +16,7 @@ CONFIG_SCHEMA = cv.Schema({
 async def to_code(config):
     var = cg.new_PAJ7620Component = paj7620_ns.class_("PAJ7620Component", cg.Component)
     var = cg.new_PAJ7620Component(config[CONF_ID])
+    cg.add(var.set_id(config[CONF_ID]))  # this registers the variable!
     await cg.register_component(var, config)
     gesture = await text_sensor.new_text_sensor(config[CONF_GESTURE])
     cg.add(var.set_gesture_sensor(gesture))
