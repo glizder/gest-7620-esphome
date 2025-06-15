@@ -14,9 +14,10 @@ CONFIG_SCHEMA = cv.Schema({
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
-    var = cg.new_PAJ7620Component = paj7620_ns.class_("PAJ7620Component", cg.Component)
-    var = cg.new_PAJ7620Component(config[CONF_ID])
-    cg.add(var.set_id(config[CONF_ID]))  # this registers the variable!
+    # 👇 zarejestruj zmienną (to rozwiązuje błąd z ID!)
+    var = cg.new_variable(config[CONF_ID], PAJ7620Component)
     await cg.register_component(var, config)
+
+    # 👇 dodaj sensor
     gesture = await text_sensor.new_text_sensor(config[CONF_GESTURE])
     cg.add(var.set_gesture_sensor(gesture))
