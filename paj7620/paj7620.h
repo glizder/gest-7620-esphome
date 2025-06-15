@@ -1,1 +1,0 @@
-// paj7620.h placeholder
