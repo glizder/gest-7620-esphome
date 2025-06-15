@@ -1,4 +1,3 @@
-
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import text_sensor
@@ -15,7 +14,7 @@ CONFIG_SCHEMA = cv.Schema({
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
-    var = cg.new_instance(PAJ7620Component, config[CONF_ID])
+    var = PAJ7620Component(config[CONF_ID])
     await cg.register_component(var, config)
     gesture = await text_sensor.new_text_sensor(config[CONF_GESTURE])
     cg.add(var.set_gesture_sensor(gesture))
