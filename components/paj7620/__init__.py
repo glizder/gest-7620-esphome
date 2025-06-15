@@ -4,7 +4,10 @@ from esphome.components import text_sensor
 from esphome.const import CONF_ID, CONF_NAME
 
 paj7620_ns = cg.esphome_ns.namespace("paj7620")
-PAJ7620Component = paj7620_ns.class_("PAJ7620Component", cg.Component)
+
+# Rejestracja klasy jako generatora nowego obiektu
+cg.new_PAJ7620Component = paj7620_ns.class_("PAJ7620Component", cg.Component)
+PAJ7620Component = cg.new_PAJ7620Component
 
 CONF_GESTURE = "gesture"
 
@@ -14,7 +17,6 @@ CONFIG_SCHEMA = cv.Schema({
 }).extend(cv.COMPONENT_SCHEMA)
 
 async def to_code(config):
-    var = cg.new_PAJ7620Component = PAJ7620Component
     var = cg.new_PAJ7620Component(config[CONF_ID])
     await cg.register_component(var, config)
     gesture = await text_sensor.new_text_sensor(config[CONF_GESTURE])
